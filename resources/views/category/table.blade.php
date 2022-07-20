@@ -11,13 +11,29 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Description</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                </tr>
+                @foreach ($categories as $category)
+                    <tr>
+                        <th scope="row">{{ $category->id }}</th>
+                        <td>{{ $category->description }}</td>
+                        <td class="d-flex justify-content-start">
+
+                            <form method="POST" action="{{ route('categoryDelete', $category->id) }}" class="text-center">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger me-2">Delete</button>
+                            </form>
+
+                            <form method="" action="#" class="text-center">
+                                <button type="submit" class="btn btn-warning">Edit</button>
+                            </form>
+                        </td>
+
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -10,14 +11,9 @@ Route::get('/', function () {
 //Grupo de rutas pertenecientes al subfijo category, todo relacionado a category va aqui
 Route::prefix('/category')->group(
     function () {
-        Route::get('/', function () {
+        Route::get('/', [CategoryController::class, 'index'])->name('categoryIndex'); //esto es la tabla de category 
 
-            return view('category.table');
-        })->name('categoryIndex'); //esto es la tabla de category 
-
-        Route::get('/register', function () {
-            return view('category.register');
-        })->name('categoryRegister'); // formulario de ingreso 
+        Route::get('/register', [CategoryController::class, 'register'])->name('categoryRegister'); // formulario de ingreso 
 
         Route::get('/edit/{id}', function () {
         })->name('categoryEdit');/* formulario de editar (difiere de update, en que 
@@ -25,8 +21,7 @@ Route::prefix('/category')->group(
 
 
         // Rutas http, peticiones al servidor
-        Route::post('/create', function () {
-        })->name('categoryCreate'); // ruta http de Create category
+        Route::post('/create', [CategoryController::class, 'create'])->name('categoryCreate'); // ruta http de Create category
 
         Route::get('/read', function () {
         })->name('categoryRead'); //ruta http de Read category
@@ -34,17 +29,13 @@ Route::prefix('/category')->group(
         Route::patch('/update/{id}', function () {
         })->name('categoryUpdate'); // ruta http de Update category
 
-        Route::delete('/delete/{id}', function () {
-        })->name('categoryDelete'); // ruta http de Delete category
+        Route::delete('/delete/{id}', [CategoryController::class, 'delete'])->name('categoryDelete'); // ruta http de Delete category
     }
 );
 
 Route::prefix('/customer')->group(
     function () {
-        Route::get('/', function () {
-
-            return view('customer.table');
-        })->name('customerIndex'); //esto es la tabla de customer 
+        Route::get('/', [CategoryController::class, 'index'])->name('customerIndex'); //esto es la tabla de customer 
 
         Route::get('/register', function () {
             return view('customer.register');
