@@ -21,15 +21,14 @@
                         <td>{{ $category->description }}</td>
                         <td class="d-flex justify-content-start">
 
-                            <form method="POST" action="{{ route('categoryDelete', $category->id) }}" class="text-center">
+                            <form method="POST" action="{{ route('categoryDelete', $category->id) }}"
+                                class="text-center">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger me-2">Delete</button>
                             </form>
 
-                            <form method="" action="#" class="text-center">
-                                <button type="submit" class="btn btn-warning">Edit</button>
-                            </form>
+                            <a href="{{ route('categoryEdit', $category->id) }}" class="btn btn-warning">Edit</a>
                         </td>
 
                     </tr>

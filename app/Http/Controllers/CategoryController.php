@@ -17,8 +17,10 @@ class CategoryController extends Controller
     {
         return view('category.register');
     }
-    public function edit() //formulario de edicion e informacion relacionada
+    public function edit($id) //formulario de edicion e informacion relacionada
     {
+        $category = Category::find($id);
+        return view('category.edit', compact('category'));
     }
 
     // metodos http crud
@@ -34,8 +36,13 @@ class CategoryController extends Controller
     {
         return Category::all();
     }
-    public function update()
+    public function update($id, Request $request)
     {
+        $data = $this->validateForm($request);
+
+        Category::find($id)->update($data);
+
+        return redirect(route('categoryIndex'));
     }
     public function delete($id)
     {

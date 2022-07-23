@@ -14,16 +14,27 @@
                     <th scope="col">Address</th>
                     <th scope="col">Phone Number</th>
                     <th scope="col">Category</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Mark</td>
-                    <td>Mark</td>
-                    <td>Mark</td>
-                </tr>
+                @foreach ($customers as $customer)
+                    <tr>
+                        <th scope="row">{{ $customer->id }}</th>
+                        <td>{{ $customer->name }}</td>
+                        <td>{{ $customer->address }}</td>
+                        <td>{{ $customer->phone_number }}</td>
+                        <td>{{ $customer->category->description }}</td>
+                        <td class="d-flex justify-content-start">
+                            <form method="POST" action="{{ route('customerDelete', $customer->id) }}" class="text-center">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger me-2">Delete</button>
+                            </form>
+                            <a href="{{ route('customerEdit', $customer->id) }}" class="btn btn-warning">Edit</a>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

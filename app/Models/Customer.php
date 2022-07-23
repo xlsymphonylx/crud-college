@@ -10,4 +10,9 @@ class Customer extends Model
     use HasFactory;
     protected $table = "customer";
     protected $guarded = ['id'];
+
+    public function category()
+    {
+        return $this->hasOne(Category::class, 'id', 'category_id');
+    }
 }
